@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>보구한의원 위치</title>
+  <title>네이버 지도</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #f5f5f5;
     }
     #map {
       width: 100%;
@@ -21,29 +20,23 @@
 <body>
   <div id="map"></div>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const script = document.createElement("script");
-      script.src = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8";
+    function loadMap() {
+      var script = document.createElement('script');
+      script.src = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID";
       script.async = true;
       script.onload = function () {
-        if (window.naver && window.naver.maps) {
-          new naver.maps.Map("map", {
-            center: new naver.maps.LatLng(37.5302699, 126.9652905),
-            zoom: 17,
-            zoomControl: true,
-            zoomControlOptions: {
-              position: naver.maps.Position.TOP_RIGHT
-            }
-          });
-        } else {
-          console.error("네이버 지도 객체 로딩 실패");
-        }
-      };
-      script.onerror = function () {
-        console.error("네이버 지도 API 스크립트 로딩 실패");
+        new naver.maps.Map('map', {
+          center: new naver.maps.LatLng(37.5302699, 126.9652905),
+          zoom: 17,
+          zoomControl: true,
+          zoomControlOptions: {
+            position: naver.maps.Position.TOP_RIGHT
+          }
+        });
       };
       document.head.appendChild(script);
-    });
+    }
+    document.addEventListener("DOMContentLoaded", loadMap);
   </script>
 </body>
 </html>
