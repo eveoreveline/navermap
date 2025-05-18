@@ -1,27 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>네이버 지도</title>
   <style>
     html, body, #map {
       margin: 0;
+      padding: 0;
       width: 100%;
       height: 100%;
       border-radius: 32px;
       overflow: hidden;
     }
   </style>
-  <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8"></script>
 </head>
 <body>
   <div id="map"></div>
   <script>
-    var map = new naver.maps.Map('map', {
-      center: new naver.maps.LatLng(37.5302699, 126.9652905),
-      zoom: 17,
-    });
+    function initMap() {
+      var map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.5302699, 126.9652905),
+        zoom: 17,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: naver.maps.Position.TOP_RIGHT
+        }
+      });
+    }
+
+    // 네이버 지도 API 스크립트 동적 로딩
+    (function() {
+      var script = document.createElement('script');
+      script.src = 'https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8&callback=initMap';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
   </script>
 </body>
 </html>
