@@ -21,17 +21,24 @@
 <body>
   <div id="map"></div>
 
-  <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8"></script>
+  <script src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8" defer></script>
   <script>
-    // naver 객체가 로드된 후 실행되도록 보장
+    window.naver = window.naver || {};
+    window.naver.maps = window.naver.maps || {};
+
     window.naver.maps.onJSContentLoaded = function () {
-      const map = new naver.maps.Map('map', {
+      const map = new naver.maps.Map("map", {
         center: new naver.maps.LatLng(37.5302699, 126.9652905),
         zoom: 17,
         zoomControl: true,
         zoomControlOptions: {
           position: naver.maps.Position.TOP_RIGHT
         }
+      });
+
+      const marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(37.5302699, 126.9652905),
+        map: map
       });
     };
   </script>
