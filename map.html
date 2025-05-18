@@ -1,50 +1,22 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>네이버 지도 예제</title>
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
-    <!-- 네이버 지도 API 불러오기 -->
-    <script
-      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8"
-      defer
-    ></script>
-  </head>
-  <body>
-    <div id="map"></div>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>간단한 지도 표시하기</title>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=nu9fvk8ex8"></script>
+</head>
+<body>
+<div id="map" style="width:100%;height:400px;"></div>
 
-    <script>
-      // API 로딩 완료 후 실행될 콜백
-      window.naver = window.naver || {};
-      window.naver.maps = window.naver.maps || {};
+<script>
+var mapOptions = {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+};
 
-      window.naver.maps.onJSContentLoaded = function () {
-        const map = new naver.maps.Map("map", {
-          center: new naver.maps.LatLng(37.5302699, 126.9652905), // 용산역 근처
-          zoom: 17,
-          zoomControl: true,
-          zoomControlOptions: {
-            position: naver.maps.Position.TOP_RIGHT,
-          },
-        });
-
-        const marker = new naver.maps.Marker({
-          position: new naver.maps.LatLng(37.5302699, 126.9652905),
-          map: map,
-        });
-      };
-    </script>
-  </body>
+var map = new naver.maps.Map('map', mapOptions);
+</script>
+</body>
 </html>
