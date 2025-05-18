@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>용산보구한의원 위치</title>
-  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8"></script>
+  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=nu9fvk8ex8"></script>
   <style>
     html, body {
       margin: 0;
@@ -19,57 +19,55 @@
   </style>
 </head>
 <body>
-<div id="map"></div>
+  <div id="map"></div>
 
-<script>
-  const LOCATION = new naver.maps.LatLng(37.5306999, 126.9652905);
+  <script>
+    const LOCATION = new naver.maps.LatLng(37.5306999, 126.9652905);
 
-  const map = new naver.maps.Map('map', {
-    center: LOCATION,
-    zoom: 17,
-    zoomControl: true,
-    zoomControlOptions: {
-      position: naver.maps.Position.TOP_RIGHT
-    }
-  });
+    const map = new naver.maps.Map('map', {
+      center: LOCATION,
+      zoom: 17,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: naver.maps.Position.TOP_RIGHT
+      }
+    });
 
-  // 마커 (갈색, 절반 크기)
-  const marker = new naver.maps.Marker({
-    position: LOCATION,
-    map: map,
-    icon: {
+    const marker = new naver.maps.Marker({
+      position: LOCATION,
+      map: map,
+      icon: {
+        content: `
+          <div style="
+            width: 12px;
+            height: 12px;
+            background: #8B4513;
+            border: 2px solid #5c3317;
+            border-radius: 50%;
+            box-shadow: 0 0 2px rgba(0,0,0,0.3);
+          "></div>
+        `,
+        anchor: new naver.maps.Point(6, 6)
+      }
+    });
+
+    const infoWindow = new naver.maps.InfoWindow({
       content: `
         <div style="
-          width: 12px;
-          height: 12px;
-          background: #8B4513;
-          border: 2px solid #5c3317;
-          border-radius: 50%;
-          box-shadow: 0 0 2px rgba(0,0,0,0.3);
-        "></div>
-      `,
-      anchor: new naver.maps.Point(6, 6)
-    }
-  });
+          padding: 10px 14px;
+          text-align: center;
+          border-radius: 8px;
+          font-family: sans-serif;
+          line-height: 1.4;
+          font-size: 13px;
+        ">
+          <div style="font-size: 16px; font-weight: bold;">용산보구한의원</div>
+          <div>(래미안용산더센트럴 221호)</div>
+        </div>
+      `
+    });
 
-  // 말풍선 (중앙정렬, 둥근 테두리, 텍스트 스타일 적용)
-  const infoWindow = new naver.maps.InfoWindow({
-    content: `
-      <div style="
-        padding: 10px 14px;
-        text-align: center;
-        border-radius: 8px;
-        font-family: sans-serif;
-        line-height: 1.4;
-        font-size: 13px;
-      ">
-        <div style="font-size: 16px; font-weight: bold;">용산보구한의원</div>
-        <div>(래미안용산더센트럴 221호)</div>
-      </div>
-    `
-  });
-
-  infoWindow.open(map, marker); // 클릭 없이 자동 표시
-</script>
+    infoWindow.open(map, marker);
+  </script>
 </body>
 </html>
