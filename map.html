@@ -9,7 +9,6 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #f5f5f5;
     }
     #map {
       width: 100%;
@@ -22,27 +21,29 @@
   <div id="map"></div>
 
   <script>
-    function loadMap() {
-      const script = document.createElement('script');
-      script.src = "https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8";
-      script.async = true;
-      script.onload = function () {
-        new naver.maps.Map('map', {
-          center: new naver.maps.LatLng(37.5302699, 126.9652905),
-          zoom: 17,
-          zoomControl: true,
-          zoomControlOptions: {
-            position: naver.maps.Position.TOP_RIGHT
-          }
-        });
-      };
-      script.onerror = function () {
-        console.error("네이버 지도 스크립트 로딩 실패");
-      };
-      document.head.appendChild(script);
-    }
+    function initMap() {
+      const map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.5302699, 126.9652905),
+        zoom: 17,
+        zoomControl: true,
+        zoomControlOptions: {
+          position: naver.maps.Position.TOP_RIGHT
+        }
+      });
 
-    document.addEventListener("DOMContentLoaded", loadMap);
+      // 마커 예시 (선택 사항)
+      const marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(37.5302699, 126.9652905),
+        map: map
+      });
+    }
   </script>
+
+  <script
+    type="text/javascript"
+    src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=nu9fvk8ex8&callback=initMap"
+    async
+    defer
+  ></script>
 </body>
 </html>
