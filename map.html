@@ -1,26 +1,57 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
   <title>용산보구 한의원 위치</title>
   <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=nu9fvk8ex8"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #f9f9f9;
+    }
+    #map {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
 </head>
 <body>
-  <div id="map" style="width:100%; height:400px;"></div>
+  <div id="map"></div>
 
   <script>
-    var mapOptions = {
-      center: new naver.maps.LatLng(37.530403, 126.964537), // ⬅ 용산보구 한의원 위치
-      zoom: 17
-    };
+    const LOCATION = new naver.maps.LatLng(37.530403, 126.964537); // 용산보구 한의원 위치
 
-    var map = new naver.maps.Map('map', mapOptions);
+    const map = new naver.maps.Map('map', {
+      center: LOCATION,
+      zoom: 17,
+      zoomControl: true,
+      zoomControlOptions: {
+        position: naver.maps.Position.TOP_RIGHT
+      }
+    });
 
-    var marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(37.530403, 126.964537),
-      map: map
+    const marker = new naver.maps.Marker({
+      position: LOCATION,
+      map: map,
+      title: "용산보구 한의원"
+      // icon: { // 커스텀 마커 아이콘 사용 시
+      //   url: "https://yourdomain.com/custom-icon.png",
+      //   size: new naver.maps.Size(32, 32),
+      //   origin: new naver.maps.Point(0, 0),
+      //   anchor: new naver.maps.Point(16, 32)
+      // }
+    });
+
+    const infoWindow = new naver.maps.InfoWindow({
+      content: '<div style="padding:8px;font-size:14px;">용산보구 한의원</div>'
+    });
+
+    naver.maps.Event.addListener(marker, "click", function () {
+      infoWindow.open(map, marker);
     });
   </script>
 </body>
