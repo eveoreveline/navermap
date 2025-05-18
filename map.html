@@ -19,13 +19,18 @@
       border-radius: 32px;
       overflow: hidden;
     }
+    .infowindow-content {
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 8px;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
 
   <script>
-    // 용산보구한의원 실제 주소 좌표
     const LOCATION = new naver.maps.LatLng(37.530403, 126.964537);
 
     const map = new naver.maps.Map('map', {
@@ -37,19 +42,36 @@
       }
     });
 
+    // 커스텀 마커 (기본 마커보다 테두리 굵게 보이도록 이미지 교체 가능)
     const marker = new naver.maps.Marker({
       position: LOCATION,
       map: map,
-      title: "용산보구한의원"
+      icon: {
+        content: `
+          <div style="
+            width: 24px;
+            height: 24px;
+            background: #03c75a;
+            border: 3px solid #007744;
+            border-radius: 50%;
+            box-shadow: 0 0 2px rgba(0,0,0,0.3);
+          "></div>
+        `,
+        anchor: new naver.maps.Point(12, 12)
+      }
     });
 
     const infoWindow = new naver.maps.InfoWindow({
-      content: '<div style="padding:8px;font-size:14px;">서울시 용산구 한강대로 95<br>래미안용산더센트럴 221호<br>용산보구한의원</div>'
+      content: `
+        <div class="infowindow-content">
+          <strong>용산보구한의원</strong><br />
+          (래미안용산더센트럴 221호)
+        </div>
+      `
     });
 
-    naver.maps.Event.addListener(marker, "click", function () {
-      infoWindow.open(map, marker);
-    });
+    // 자동으로 인포윈도우 열기
+    infoWindow.open(map, marker);
   </script>
 </body>
 </html>
